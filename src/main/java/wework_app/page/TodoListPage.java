@@ -14,33 +14,6 @@ public class TodoListPage extends BasePage {
 
     public TodoListPage(){}
 
-
-//    public TodoListPage createItem(int mode, String content) {
-//        if(mode==1){
-//            swipe(1, 0.5, 0.8);
-//        }else if(mode==2){
-//            click(By.id("gym"));
-//        }else{
-//            System.out.println("类型不对，请选择 1(下滑新建) 或 2( +号按钮新建)");
-//            return this;
-//        }
-//        sendKeys(By.xpath("//android.widget.EditText"), content);
-//        //参与人
-//        click("请选择");
-//        click("企业通讯录");
-//        click(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.FrameLayout[2]/android.widget.RelativeLayout/android.widget.ListView/android.widget.RelativeLayout[2]/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/android.widget.ImageView"));
-//        click(By.id("fq1"));
-//        //提醒我
-//        click(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.RelativeLayout/android.widget.RelativeLayout[1]/android.widget.TextView\n"));
-//
-//        tap(626, 1230);
-//        swipe(0.1, 0.2);
-//        swipe(0.2, 0.8);
-//        click(By.xpath("确定"));
-//        //保存
-//        click("保存");
-//        return this;
-//    }
     /**
      * 新建代办事项
      * @param mode :  1-下滑新建   2-点击+新建待办事项
