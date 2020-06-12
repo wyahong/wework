@@ -1,4 +1,4 @@
-package weworkTest;
+package wework_web;
 
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;

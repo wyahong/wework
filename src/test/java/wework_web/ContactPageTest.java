@@ -1,4 +1,4 @@
-package weworkTest;
+package wework_web;
 
 import org.junit.jupiter.api.*;
 
