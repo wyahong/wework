@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import wework_app.base.BasePage;
 
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class SchedulePage extends BasePage {
@@ -12,10 +13,13 @@ public class SchedulePage extends BasePage {
     public SchedulePage(){}
 
     /**
-     * 创建日程
-     * @param day  日期
+     * 日程页
+     * @param day 日期
      * @param mode 日程创建方式： 1-底部的新建日程按钮， 2-右上角的+
-     * @param title 日程的主题
+     * @param title 日程主题
+     * @param time 选填：日期修改
+     * @param join 选填：参与人
+     * @param more 选填：更多信息
      * @return
      */
     public SchedulePage addSchedule(String day, int mode, String title, boolean time, boolean join, boolean more) {
@@ -44,7 +48,7 @@ public class SchedulePage extends BasePage {
     }
 
     /**
-     * @param day ： 选择的日期， 点击时元素为日期+1
+     * @param day 选择的日期， 点击时元素为日期+1
      */
     public void time(int day){
         click(By.xpath("//android.widget.LinearLayout[3]/android.widget.ImageView"));
@@ -52,25 +56,43 @@ public class SchedulePage extends BasePage {
         click(By.xpath("//android.widget.GridView/android.view.View["+(day+1)+"]"));
         click(By.id("bq9"));
         click(By.id("afl"));
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         swipe(By.id("czy"),1, 0.5);
         swipe(By.id("e8k"),1, 0.5);
         click(By.id("bq9"));
         click(By.id("af8"));
         click(By.xpath("//android.support.v7.widget.RecyclerView/android.widget.RelativeLayout[4]/android.widget.RelativeLayout"));
     }
-    //参与人
+    //选填：时间段(随机）--- 测试中
+    private void time(){
+        List<MobileElement> elements = getElements(By.xpath("//android.view.ViewGroup"));
+        elements.add(findElement(By.id("hsb")));
+        Random random = new Random();
+        int index = random.nextInt(elements.size());
+        click(elements.get(index));
+        if((getAttribute(By.xpath("//android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.ImageView"), "selected")).equals("true")){
+            click(By.xpath("//android.widget.GridView/android.view.View[22]"));
+            click(By.id("bq9"));
+            click(By.xpath("//android.widget.GridView/android.view.View[25]"));
+            click(By.id("bq9"));
+        }else{
+            click(By.xpath("//android.widget.GridView/android.view.View[22]"));
+            click(By.id("bq9"));
+            click(By.id("afl"));
+            swipe(By.id("czy"),1, 0.5);
+            swipe(By.id("e8k"),1, 0.5);
+            click(By.id("bq9"));
+            click(By.id("af8"));
+            click(By.xpath("//android.support.v7.widget.RecyclerView/android.widget.RelativeLayout[4]/android.widget.RelativeLayout"));
+        }
+    }
+    //日程选填：参与人
     public void join(){
         click(By.id("avv"));
         click("企业通讯录");
         click(By.xpath("//android.widget.FrameLayout[2]/android.widget.RelativeLayout/android.widget.ListView/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/android.widget.ImageView"));
         click(By.id("fq1"));
     }
-    //更多信息
+    //日程选填：更多信息
     public void more(){
         click("更多信息");
         //附件

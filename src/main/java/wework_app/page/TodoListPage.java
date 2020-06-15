@@ -8,17 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 代办页
+ * 待办事项
  */
 public class TodoListPage extends BasePage {
 
     public TodoListPage(){}
 
     /**
-     * 新建代办事项
-     * @param mode :  1-下滑新建   2-点击+新建待办事项
-     * @param content : 代办事项内容
-     * @param date    : 提醒日期
+     * 创建待办
+     * @param mode 1-下滑新建   2-点击+新建待办事项
+     * @param content 待办内容
+     * @param join 选填：参与人
+     * @param notice 选填：提醒我
+     * @param date 提醒我日期
      * @return
      */
     public TodoListPage createItem(int mode, String content, boolean join, boolean notice, int date) {
@@ -32,25 +34,21 @@ public class TodoListPage extends BasePage {
         }
         sendKeys(By.xpath("//android.widget.EditText"), content);
         //选填项
-        if(join==true){
-            join();
-        }
-        if(notice==true){
-            notice(date);
-        }
+        if(join==true){ join();}
+        if(notice==true){ notice(date); }
         //保存
         click("保存");
         return this;
     }
-    //参与人
+    //待办选填：参与人
     private void join(){
         click("请选择");
         click("企业通讯录");
         click(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.FrameLayout[2]/android.widget.RelativeLayout/android.widget.ListView/android.widget.RelativeLayout[2]/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/android.widget.ImageView"));
         click(By.id("fq1"));
     }
-    //提醒我
-    public void notice(int date){
+    //待办选填：提醒我
+    private void notice(int date){
         click(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.RelativeLayout/android.widget.RelativeLayout[1]/android.widget.TextView\n"));
         if(isExist(By.xpath("//android.widget.GridView/android.view.View["+(date+1)+"]"))){
             click(By.xpath("//android.widget.GridView/android.view.View["+(date+1)+"]"));

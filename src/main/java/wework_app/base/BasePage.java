@@ -102,15 +102,6 @@ public class BasePage {
         return driver.findElement(by).getText();
     }
 
-    //滑动
-    public void swipe(double x1, double x2, double y1, double y2){
-        int width = driver.manage().window().getSize().getWidth();
-        int height = driver.manage().window().getSize().getHeight();
-        TouchAction action = new TouchAction(driver);
-        action.press(PointOption.point((int)(width*x1),(int)(height*y1))).waitAction(WaitOptions.waitOptions(Duration.ofMillis(2000))).moveTo(
-                PointOption.point((int)(width*x2),(int)(height*y2))).release().perform();
-    }
-
     /**
      * 滑动
      * @param mode  1-上下滑动   2-左右滑动
@@ -130,7 +121,14 @@ public class BasePage {
         }else{
             System.out.println("模式不对：1(上下滑动） 或 2（左右滑动）");
         }
-
+    }
+    //滑动
+    public void swipe(double x1, double x2, double y1, double y2){
+        int width = driver.manage().window().getSize().getWidth();
+        int height = driver.manage().window().getSize().getHeight();
+        TouchAction action = new TouchAction(driver);
+        action.press(PointOption.point((int)(width*x1),(int)(height*y1))).waitAction(WaitOptions.waitOptions(Duration.ofMillis(2000))).moveTo(
+                PointOption.point((int)(width*x2),(int)(height*y2))).release().perform();
     }
 
     //按压元素滑动
@@ -143,7 +141,6 @@ public class BasePage {
                 waitAction(WaitOptions.waitOptions(Duration.ofMillis(2000))).
                 moveTo(PointOption.point((int)(pointX*x), (int)(pointY*y))).release().perform();
     }
-
     //坐标定位
     public void tap(int a, int b){
         TouchAction action = new TouchAction(driver);
@@ -152,8 +149,8 @@ public class BasePage {
         action.tap(pointOption).release().perform();
     }
 
-    public String getAttribute(By by){
-         return findElement(by).getAttribute("content-desc");
+    public String getAttribute(By by, String attribute){
+         return findElement(by).getAttribute(attribute);
     }
 
     public void quit(){
