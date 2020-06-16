@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 public class SchedulePage extends BasePage {
 
     public SchedulePage(){}
-
     /**
      * 日程页
      * @param day 日期
@@ -47,35 +46,24 @@ public class SchedulePage extends BasePage {
         return this;
     }
 
-    /**
-     * @param day 选择的日期， 点击时元素为日期+1
-     */
-    public void time(int day){
-        click(By.xpath("//android.widget.LinearLayout[3]/android.widget.ImageView"));
-        click(By.id("afk"));
-        click(By.xpath("//android.widget.GridView/android.view.View["+(day+1)+"]"));
-        click(By.id("bq9"));
-        click(By.id("afl"));
-        swipe(By.id("czy"),1, 0.5);
-        swipe(By.id("e8k"),1, 0.5);
-        click(By.id("bq9"));
-        click(By.id("af8"));
-        click(By.xpath("//android.support.v7.widget.RecyclerView/android.widget.RelativeLayout[4]/android.widget.RelativeLayout"));
-    }
-    //选填：时间段(随机）--- 测试中
-    private void time(){
+    //选填：时间段(随机点击时段）
+    private void time(int day){
         List<MobileElement> elements = getElements(By.xpath("//android.view.ViewGroup"));
         elements.add(findElement(By.id("hsb")));
         Random random = new Random();
         int index = random.nextInt(elements.size());
         click(elements.get(index));
+        //选中全天
         if((getAttribute(By.xpath("//android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.ImageView"), "selected")).equals("true")){
-            click(By.xpath("//android.widget.GridView/android.view.View[22]"));
+            click(By.id("afk"));
+            click(By.xpath("//android.widget.GridView/android.view.View["+(day+1)+"]"));
             click(By.id("bq9"));
-            click(By.xpath("//android.widget.GridView/android.view.View[25]"));
+            click(By.id("af6"));
+            click(By.xpath("//android.widget.GridView/android.view.View["+(day+2)+"]"));
             click(By.id("bq9"));
-        }else{
-            click(By.xpath("//android.widget.GridView/android.view.View[22]"));
+        }else{//选中其他时段
+            click(By.id("afk"));
+            click(By.xpath("//android.widget.GridView/android.view.View["+(day+1)+"]"));
             click(By.id("bq9"));
             click(By.id("afl"));
             swipe(By.id("czy"),1, 0.5);
